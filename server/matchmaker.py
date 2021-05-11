@@ -200,7 +200,7 @@ class MatchMaker:
                 self._commit_changes()
                 self._log_operation(f'Assigned driver "{driver_id}" to ride "{ride_id}".')
                 return True
-        self._log_operation(f'Failed to assigned driver "{driver_id}" to ride "{ride_id}".')
+        self._log_operation(f'Failed to assign driver "{driver_id}" to ride "{ride_id}".')
         return False
 
     def remove_driver_from_ride(self, driver_id: str, ride_id: str) -> bool:
@@ -215,7 +215,7 @@ class MatchMaker:
                                               if t[2] != ride_id]
                 ride.assigned_driver = None
                 self._commit_changes()
-                self._log_operation(f'Driver "{driver_id}" removed from ride "{ride_id}".')
+                self._log_operation(f'Removed driver "{driver_id}" from ride "{ride_id}".')
                 return True
         self._log_operation(f'Failed to remove driver "{driver_id}" from ride "{ride_id}"')
         return False
