@@ -3,11 +3,9 @@ This file constructs a graph from a list of drivers and rides to run our matchin
 """
 
 from server.maps_api import get_distance_between
-
-from server.objects.rides import Ride, get_rides_list
-from server.objects.driver import Driver, get_drivers_list
-
 from server.max_flow import ford_fulkerson
+from server.objects.driver import Driver, get_drivers_list
+from server.objects.rides import Ride, get_rides_list
 
 
 def is_suitable(driver: Driver, ride: Ride) -> bool:
