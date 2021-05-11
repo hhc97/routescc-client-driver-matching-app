@@ -50,6 +50,7 @@ class MatchMaker:
             self.rides = pickle.loads(previous_data[RIDES])
             self.drivers = pickle.loads(previous_data[DRIVERS])
             self.rejected = pickle.loads(previous_data[REJECTED_MATCHES])
+        self._log_operation('Matcher object instantiated.')
 
     def _log_operation(self, message: str) -> None:
         """
@@ -121,6 +122,7 @@ class MatchMaker:
             driver.unavailable_timings = [t for t in driver.unavailable_timings
                                           if t[2] != ride_id]
         self._commit_changes()
+        self._log_operation(f'Ride "{ride_id}" deleted.')
 
     def delete_driver(self, driver_id: str) -> None:
         """
@@ -131,6 +133,7 @@ class MatchMaker:
             if ride.assigned_driver is not None and ride.assigned_driver.id == driver_id:
                 ride.assigned_driver = None
         self._commit_changes()
+        self._log_operation(f'Driver "{driver_id}" deleted.')
 
     def add_rides(self, rides: List[Ride]) -> None:
         """
@@ -138,6 +141,7 @@ class MatchMaker:
         """
         self.rides.extend(rides)
         self._commit_changes()
+        self._log_operation('Rides added manually.')
 
     def add_drivers(self, drivers: List[Driver]) -> None:
         """
@@ -145,6 +149,7 @@ class MatchMaker:
         """
         self.drivers.extend(drivers)
         self._commit_changes()
+        self._log_operation('Drivers added manually.')
 
     def add_rides_by_csv(self, filepath: str) -> None:
         """
@@ -152,6 +157,7 @@ class MatchMaker:
         """
         self.rides.extend(get_rides_list(filepath))
         self._commit_changes()
+        self._log_operation('Rides added through batch upload.')
 
     def add_drivers_by_csv(self, filepath: str) -> None:
         """
@@ -159,6 +165,7 @@ class MatchMaker:
         """
         self.drivers.extend(get_drivers_list(filepath))
         self._commit_changes()
+        self._log_operation('Drivers added through batch upload.')
 
     def get_all_rides(self) -> dict:
         """
@@ -167,6 +174,7 @@ class MatchMaker:
         rides = {}
         for r in self.rides:
             rides[r.id] = r
+        self._log_operation(f'List of all rides retrieved.')
         return rides
 
     def get_all_drivers(self) -> dict:
@@ -176,6 +184,7 @@ class MatchMaker:
         drivers = {}
         for d in self.drivers:
             drivers[d.id] = d
+        self._log_operation('List of all drivers retrieved.')
         return drivers
 
     def assign_driver_to_ride(self, driver_id: str, ride_id: str) -> bool:
@@ -190,7 +199,9 @@ class MatchMaker:
             if driver.add_accepted_ride(ride):
                 ride.assign_driver(driver)
                 self._commit_changes()
+                self._log_operation(f'Assigned driver "{driver_id}" to ride "{ride_id}".')
                 return True
+        self._log_operation(f'Failed to assigned driver "{driver_id}" to ride "{ride_id}".')
         return False
 
     def remove_driver_from_ride(self, driver_id: str, ride_id: str) -> bool:
@@ -205,7 +216,9 @@ class MatchMaker:
                                               if t[2] != ride_id]
                 ride.assigned_driver = None
                 self._commit_changes()
+                self._log_operation(f'Driver "{driver_id}" removed from ride "{ride_id}".')
                 return True
+        self._log_operation(f'Failed to remove driver "{driver_id}" from ride "{ride_id}"')
         return False
 
     def add_rejected_pairing(self, driver_id: str, ride_id: str) -> None:
@@ -215,6 +228,7 @@ class MatchMaker:
         """
         self.rejected.add((driver_id, ride_id))
         self._commit_changes()
+        self._log_operation(f'Rejected pair added: "{ride_id}" and "{driver_id}".')
 
     def _filter_unmatched_rides(self) -> None:
         """
