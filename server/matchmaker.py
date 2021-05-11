@@ -271,7 +271,7 @@ class MatchMaker:
                             f'rides unmatched: {len(self.unmatched_rides) - len(self.matches)}')
         # if some rides were not matched, keep trying to match until at least 1 match
         if len(self.matches) < len(self.unmatched_rides) <= 200 and match_dist < 80:
-            self.match(ceil(match_dist * 2))
+            self.match(ceil(match_dist * 2), force_match=True)
 
     def match(self, max_dist: int = 10,
               max_ride_pairings_per_driver: int = 200,
