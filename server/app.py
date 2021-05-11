@@ -350,6 +350,12 @@ def upload_driver():
     return jsonify({"message": "Successfully added a new driver", "is_successful": True})
 
 
+@app.route('/graph')
+def get_graph():
+    matcher = _get_backend(request.remote_addr)
+    return jsonify(matcher.match(force_match=True))
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 80))
     app.run(host='0.0.0.0', port=port, debug=True)
