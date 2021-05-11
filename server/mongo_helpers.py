@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 import pymongo
 
@@ -7,6 +8,20 @@ CONN_STRING = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/')
 client = pymongo.MongoClient(CONN_STRING, serverSelectionTimeoutMS=5000)
 
 db = client.routescc
+
+
+def _get_time() -> str:
+    """
+    Gets the current date and time and returns it in a string format.
+    """
+    return str(datetime.now())[:19]
+
+
+def get_log_document() -> dict:
+    """
+    Returns a basic log document with the time field set.
+    """
+    return {'time': _get_time()}
 
 
 def add_to_db(collection_name: str, document: dict) -> None:

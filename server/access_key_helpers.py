@@ -5,7 +5,6 @@ Running this module directly will set the allowed access keys on the server
 to whatever is specified in a 'access_keys.txt' file in the same directory.
 """
 
-from datetime import datetime
 from random import choice
 from string import ascii_letters
 
@@ -15,14 +14,7 @@ COLLECTION_NAME = 'access_keys'
 FIELD_NAME = 'keys'
 KEY_FILE = 'access_keys.txt'
 
-LOG_COLLECTION = 'logs'
-
-
-def _get_time() -> str:
-    """
-    Gets the current date and time and returns it in a string format.
-    """
-    return str(datetime.now())[:19]
+LOG_COLLECTION = 'access_logs'
 
 
 def authenticate(key: str) -> bool:
@@ -30,7 +22,7 @@ def authenticate(key: str) -> bool:
     Returns a boolean value indicating if this key is a valid key.
     Also logs the attempt in the database.
     """
-    log_document = {'time': _get_time()}
+    log_document = db.get_log_document()
     keys = db.get_latest(COLLECTION_NAME).get(FIELD_NAME, [])
     success = key in keys
     if success:
