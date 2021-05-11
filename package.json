@@ -1,0 +1,11 @@
+{
+    "name": "app_server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.py",
+    "scripts": {
+        "heroku-postbuild": "cd client && npm install && npm run build"
+    },
+    "author": "",
+    "license": "ISC"
+}

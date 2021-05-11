@@ -1,0 +1,52 @@
+#filterPanel {
+	float: left;
+	width: 240px;
+	height: 100%;
+}
+
+#filterWrapper {
+	width: 200px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 60px;
+}
+
+.filterSpacing {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#tablePanel {
+	margin-left: 240px;
+	width: 75%;
+	height: 100%;
+}
+
+#tableHeader {
+	width: 100%;
+	display: flex;
+}
+
+#searchBarWrapper {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#addButtonWrapper {
+	margin-right: 10px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#tableWrapper {
+
+}
+
+#conflictingTripsModal {
+	display: flex; 
+	align-items: center;
+	justify-content: center;
+}

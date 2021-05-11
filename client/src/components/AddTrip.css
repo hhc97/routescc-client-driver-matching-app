@@ -1,0 +1,16 @@
+#inputFieldPanel {
+	margin: 20px;
+	width: 50%;
+}
+
+.inputField {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.textFieldWrapper {
+	display: flex;
+	gap: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
