@@ -3,7 +3,8 @@
 This project was made with a team of 6 people for an Intro to Software Engineering course at the University of Toronto. The commit history has been omitted to protect sensitive client information which we worked with. The source code itself however, is open source.
 
 
-Deployed at -> [https://routesmatchingapp.herokuapp.com/trips](https://routesmatchingapp.herokuapp.com/trips)  
+Deployed at -> [https://routescc.herokuapp.com/](https://routescc.herokuapp.com/trips)  
+
 Bonus Desktop app can be downloaded at -> https://utoronto-my.sharepoint.com/:f:/g/personal/pawanpreet_mundi_mail_utoronto_ca/EjXm2WrwEj9Ap_qpAV3wHbQBoEo-fhXE8CeOKxY8RTT9_g?e=utzqlJ
 
 [Phase 1 readme](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/deliverables/deliverable-1/planning.md)  
