@@ -265,9 +265,11 @@ class MatchMaker:
                     if ride not in self.matches:
                         self.matches[ride] = set()
                     self.matches[ride].add(key)
-        # if no rides were assigned, keep trying to match until at least 1 match
-        print(f'matches made: {len(self.matches)}, '
-              f'rides unmatched: {len(self.unmatched_rides) - len(self.matches)}\n')
+        self._log_operation(f'match summary: '
+                            f'distance limit: {match_dist}, '
+                            f'matches made: {len(self.matches)}, '
+                            f'rides unmatched: {len(self.unmatched_rides) - len(self.matches)}')
+        # if some rides were not matched, keep trying to match until at least 1 match
         if len(self.matches) < len(self.unmatched_rides) <= 200 and match_dist < 80:
             self.match(ceil(match_dist * 2))
 
@@ -288,10 +290,6 @@ class MatchMaker:
         """
         if not self.changed and not force_match:
             return {'message': 'matching algorithm not run'}
-        self._log_operation(f'Running match with params: '
-                            f'max_dist: {max_dist}, '
-                            f'max_ride_pairings_per_driver: {max_ride_pairings_per_driver}, '
-                            f'max_suggested_drivers_per_ride: {max_suggested_drivers_per_ride}')
         self._filter_unmatched_rides()
         start_node = 's'
         sink_node = 't'
@@ -318,15 +316,4 @@ class MatchMaker:
 
 if __name__ == '__main__':
     matcher = MatchMaker()
-    # matcher.add_rides_by_csv('data/rides.csv')
-    # matcher.add_drivers_by_csv('data/drivers.csv')
     matcher.match()
-    # matcher.remove_old_rides()
-    # for k, v in matcher.matches.items():
-    #     print(k, v)
-    # rds = matcher.get_all_rides()
-    # for k, v in rds.items():
-    #     print(f'id: {k}, obj: {v}')
-    # dvs = matcher.get_all_drivers()
-    # for k, v in dvs.items():
-    #     print(f'id: {k}, obj: {v}')
