@@ -31,7 +31,7 @@ class MatchMaker:
     changed: bool
     rejected: set
 
-    def __init__(self) -> None:
+    def __init__(self, requester: str = None) -> None:
         """
         Initializes a new MatchMaker object.
         """
@@ -41,6 +41,7 @@ class MatchMaker:
         self.unmatched_rides = []
         self.changed = False
         self.rejected = set()
+        self.requester = requester
 
         previous_data = db.get_latest(COLLECTION_NAME)
         if previous_data:
