@@ -1,6 +1,7 @@
 .idea/
 .DS_store
 __pycache__
+venv/
 
 # dependencies
 /node_modules
