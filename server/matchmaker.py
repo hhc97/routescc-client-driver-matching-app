@@ -288,9 +288,9 @@ class MatchMaker:
         """
         if not self.changed and not force_match:
             return {'message': 'matching algorithm not run'}
-        self._log_operation(f'Running match with params:'
-                            f'max_dist: {max_dist}'
-                            f'max_ride_pairings_per_driver: {max_ride_pairings_per_driver}'
+        self._log_operation(f'Running match with params: '
+                            f'max_dist: {max_dist}, '
+                            f'max_ride_pairings_per_driver: {max_ride_pairings_per_driver}, '
                             f'max_suggested_drivers_per_ride: {max_suggested_drivers_per_ride}')
         self._filter_unmatched_rides()
         start_node = 's'
