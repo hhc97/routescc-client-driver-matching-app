@@ -173,7 +173,7 @@ class MatchMaker:
         rides = {}
         for r in self.rides:
             rides[r.id] = r
-        self._log_operation(f'List of all rides retrieved.')
+        self._log_operation('List of all rides retrieved.')
         return rides
 
     def get_all_drivers(self) -> dict:
@@ -217,7 +217,7 @@ class MatchMaker:
                 self._commit_changes()
                 self._log_operation(f'Removed driver "{driver_id}" from ride "{ride_id}".')
                 return True
-        self._log_operation(f'Failed to remove driver "{driver_id}" from ride "{ride_id}"')
+        self._log_operation(f'Failed to remove driver "{driver_id}" from ride "{ride_id}".')
         return False
 
     def add_rejected_pairing(self, driver_id: str, ride_id: str) -> None:
