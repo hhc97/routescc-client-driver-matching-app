@@ -20,6 +20,8 @@ DRIVERS = 'drivers'
 RIDES = 'rides'
 REJECTED_MATCHES = 'rejected_pairs'
 
+LOG_COLLECTION = 'operation_logs'
+
 
 class MatchMaker:
     """
@@ -48,6 +50,19 @@ class MatchMaker:
             self.rides = pickle.loads(previous_data[RIDES])
             self.drivers = pickle.loads(previous_data[DRIVERS])
             self.rejected = pickle.loads(previous_data[REJECTED_MATCHES])
+
+    def _log_operation(self, message: str) -> None:
+        """
+        Logs an operation to the database.
+
+        This function will only log if the request came from a flask server,
+        running the matchmaker directly will not log any operations.
+        """
+        if self.requester is not None:
+            log_document = db.get_log_document()
+            log_document['ip_address'] = self.requester
+            log_document['message'] = message
+            db.add_to_db(LOG_COLLECTION, log_document)
 
     def _commit_changes(self) -> None:
         """
