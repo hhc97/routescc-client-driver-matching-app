@@ -50,7 +50,6 @@ class MatchMaker:
             self.rides = pickle.loads(previous_data[RIDES])
             self.drivers = pickle.loads(previous_data[DRIVERS])
             self.rejected = pickle.loads(previous_data[REJECTED_MATCHES])
-        self._log_operation('Matcher object instantiated.')
 
     def _log_operation(self, message: str) -> None:
         """
