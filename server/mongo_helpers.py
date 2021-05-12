@@ -24,7 +24,7 @@ def add_to_db(collection_name: str, document: dict, include_time: bool = True) -
     By default, includes the time that the document was added.
     """
     if include_time:
-        document['_time'] = _get_time()
+        document['_last_edited'] = _get_time()
     collection = db[collection_name]
     collection.insert_one(document)
 
