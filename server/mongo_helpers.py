@@ -17,13 +17,6 @@ def _get_time() -> str:
     return str(datetime.now())[:19]
 
 
-def get_log_document() -> dict:
-    """
-    Returns a basic log document with the time field set.
-    """
-    return {'time': _get_time()}
-
-
 def add_to_db(collection_name: str, document: dict, include_time: bool = True) -> None:
     """
     Inserts a document into the DB.
