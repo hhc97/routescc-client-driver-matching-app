@@ -24,10 +24,14 @@ def get_log_document() -> dict:
     return {'time': _get_time()}
 
 
-def add_to_db(collection_name: str, document: dict) -> None:
+def add_to_db(collection_name: str, document: dict, include_time: bool = True) -> None:
     """
     Inserts a document into the DB.
+
+    By default, includes the time that the document was added.
     """
+    if include_time:
+        document['_time'] = _get_time()
     collection = db[collection_name]
     collection.insert_one(document)
 

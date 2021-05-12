@@ -59,7 +59,7 @@ class MatchMaker:
         running the matchmaker directly will not log any operations.
         """
         if self.requester is not None:
-            log_document = db.get_log_document()
+            log_document = dict()
             log_document['ip_address'] = self.requester
             log_document['message'] = message
             db.add_to_db(LOG_COLLECTION, log_document)

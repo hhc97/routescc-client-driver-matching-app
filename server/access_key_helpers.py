@@ -22,14 +22,12 @@ def authenticate(key: str) -> bool:
     Returns a boolean value indicating if this key is a valid key.
     Also logs the attempt in the database.
     """
-    log_document = db.get_log_document()
     keys = db.get_latest(COLLECTION_NAME).get(FIELD_NAME, [])
     success = key in keys
     if success:
-        log_document['message'] = f'User logged in with key "{key}"'
+        db.add_to_db(LOG_COLLECTION, {'message': f'User logged in with key "{key}".'})
     else:
-        log_document['message'] = f'Failed attempt to log in with key "{key}"'
-    db.add_to_db(LOG_COLLECTION, log_document)
+        db.add_to_db(LOG_COLLECTION, {'message': f'Failed attempt to log in with key "{key}".'})
     return success
 
 
