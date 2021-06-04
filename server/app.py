@@ -63,7 +63,7 @@ def _get_backend(requester: str) -> MatchMaker:
     """
     Makes and returns a Matchmaker object.
     """
-    matcher = MatchMaker(requester)
+    matcher = MatchMaker(request.headers.getlist("X-Forwarded-For"))
     matcher.match()
     return matcher
 
