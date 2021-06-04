@@ -63,7 +63,10 @@ def _get_backend() -> MatchMaker:
     """
     Makes and returns a Matchmaker object.
     """
-    matcher = MatchMaker(request.access_route)
+    requester = request.access_route
+    if len(requester) == 1:
+        requester = requester[0]
+    matcher = MatchMaker(requester)
     matcher.match()
     return matcher
 
