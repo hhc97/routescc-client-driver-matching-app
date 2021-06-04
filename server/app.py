@@ -59,10 +59,13 @@ def not_found(e):
 app.secret_key = 'secret'
 
 
-def _get_backend(requester: str) -> MatchMaker:
+def _get_backend() -> MatchMaker:
     """
     Makes and returns a Matchmaker object.
     """
+    requester = request.access_route
+    if len(requester) == 1:
+        requester = requester[0]
     matcher = MatchMaker(requester)
     matcher.match()
     return matcher
@@ -106,7 +109,7 @@ def allowed_file(filename):
 
 @app.route('/upload_backend', methods=['GET', 'POST'])
 def upload_files():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -146,7 +149,7 @@ def upload_files():
 
 @app.route('/drivers')
 def drivers():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     drivers = []
     for k, v in matcher.get_all_drivers().items():
         drivers.append(v.__dict__.copy())
@@ -155,7 +158,7 @@ def drivers():
 
 @app.route('/rides')
 def get_all_rides():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     rides = []
     for k, v in matcher.get_all_rides().items():
         ride = v.__dict__.copy()
@@ -179,7 +182,7 @@ def get_all_rides():
 
 @app.route('/ride')
 def get_single_ride():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     ride_id = request.args.get('ride_id')
     if not ride_id:
         return jsonify({"ride": None, "message": "Missing ride_id."})
@@ -208,7 +211,7 @@ def get_single_ride():
 
 @app.route('/assign', methods=['POST'])
 def assign():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     data = request.json
     if "ride_id" not in data or "driver_id" not in data:
         return jsonify({
@@ -231,7 +234,7 @@ def assign():
 
 @app.route('/unassign', methods=['POST'])
 def unassign():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     data = request.json
     if "ride_id" not in data or "driver_id" not in data:
         return jsonify({
@@ -254,7 +257,7 @@ def unassign():
 
 @app.route('/reject_pair', methods=['POST'])
 def reject_pair():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     data = request.json
     if "ride_id" not in data or "driver_id" not in data:
         return jsonify({
@@ -272,7 +275,7 @@ def reject_pair():
 
 @app.route('/delete_ride', methods=['POST'])
 def delete_ride():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     data = request.json
     if "ride_id" not in data:
         return jsonify({
@@ -290,7 +293,7 @@ def delete_ride():
 
 @app.route('/delete_driver', methods=['POST'])
 def delete_driver():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     data = request.json
     if "driver_id" not in data:
         return jsonify({
@@ -308,7 +311,7 @@ def delete_driver():
 
 @app.route('/upload/ride', methods=['POST'])
 def upload_ride():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     data = request.json
 
     client_id = data["client_id"]
@@ -329,7 +332,7 @@ def upload_ride():
 
 @app.route('/upload/driver', methods=['POST'])
 def upload_driver():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     data = request.json
 
     first_name = data["first_name"]
@@ -352,7 +355,7 @@ def upload_driver():
 
 @app.route('/graph')
 def get_graph():
-    matcher = _get_backend(request.remote_addr)
+    matcher = _get_backend()
     return jsonify(matcher.match(force_match=True))
 
 

@@ -7,7 +7,7 @@ from __future__ import annotations
 import pickle
 from datetime import datetime
 from math import ceil
-from typing import List
+from typing import List, Union
 
 import server.mongo_helpers as db
 from server.maps_api import get_distance_between
@@ -33,7 +33,7 @@ class MatchMaker:
     changed: bool
     rejected: set
 
-    def __init__(self, requester: str = None) -> None:
+    def __init__(self, requester: Union[list, str] = None) -> None:
         """
         Initializes a new MatchMaker object.
         """
