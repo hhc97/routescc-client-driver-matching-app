@@ -1,0 +1,38 @@
+name: heroku_deploy_staging
+
+on:
+  # Triggers the workflow on push events for any non-main branch
+  push:
+    branches-ignore: [ main ]
+
+jobs:
+  deploy-to-staging:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Configure Heroku login credentials
+        run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+        env:
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      - name: Add Heroku remote
+        run: |
+          heroku --version
+          heroku git:remote -a $HEROKU_STAGING
+        env:
+          HEROKU_STAGING: ${{ secrets.HEROKU_STAGING }}
+      - name: Push to Heroku
+        run: |
+          BRANCH_TO_DEPLOY=`git branch --show-current`
+          git push -f heroku $BRANCH_TO_DEPLOY:main
