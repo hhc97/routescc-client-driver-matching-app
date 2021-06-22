@@ -29,7 +29,9 @@ class AddressStore:
         An approximate area can be specified, since addresses by street and house number
         are not unique. This area defaults to Ontario, Canada
         """
-        string_location += approximate_area
+        string_location = string_location.replace('.', '').replace('$', '')
+        if not ('ON' in string_location or 'ontario' in string_location.lower()):
+            string_location += approximate_area
         if string_location not in self.mapping:
             self.mapping[string_location] = get_coordinates(string_location, google_api_key)
             self._commit()
