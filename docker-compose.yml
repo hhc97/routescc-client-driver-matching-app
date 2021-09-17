@@ -1,0 +1,31 @@
+services:
+  app:
+    container_name: rides-matcher-app
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: production
+      WEB_CONCURRENCY: 8
+      MONGODB_URI: mongodb://root:rootpassword@db:27017/
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    container_name: rides-matcher-db
+    cap_add:
+      - SYS_NICE
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - "27018:27017"
+    volumes:
+      - matching-app-volume:/data/db
+volumes:
+  matching-app-volume:
