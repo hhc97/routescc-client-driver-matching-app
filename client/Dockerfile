@@ -4,7 +4,7 @@ FROM node:alpine as builder
 COPY /client /client
 
 RUN npm install react-scripts@latest -g
-RUN cd client && npm install && npm run build && cd ..
+RUN cd client && npm install && npm run build
 
 
 FROM python:3.9
