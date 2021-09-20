@@ -17,7 +17,7 @@ class Login extends React.Component {
 
   componentDidMount() {
     // enter key tries to sign in
-    window.onkeypress = e => { if (e.keyCode === 13) { this.handleLogin() } }
+    window.onkeydown = e => { if (e.code === 'Enter') { this.handleLogin() } }
   }
 
   handleInputChange = (event) => {
