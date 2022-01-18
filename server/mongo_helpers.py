@@ -68,8 +68,5 @@ def get_latest(collection_name: str) -> dict:
 
 
 if __name__ == '__main__':
-    col_name = 'tester'
-    # add_to_db(col_name, {'a': 4})
-    # add_to_db(col_name, {'a': 5})
-    # add_to_db(col_name, {'a': 6})
-    print(get_latest(col_name))
+    # if run as main, this adds "admin" as an access key for testing purposes
+    add_to_db('access_keys', {'keys': ['admin']})
