@@ -5,8 +5,6 @@ This project was made with a team of 6 people for an Intro to Software Engineeri
 
 Deployed at -> [https://routescc.herokuapp.com/](https://routescc.herokuapp.com/trips) (Access key: `admin`)  
 
-Bonus Desktop app can be downloaded at -> https://utoronto-my.sharepoint.com/:f:/g/personal/pawanpreet_mundi_mail_utoronto_ca/EjXm2WrwEj9Ap_qpAV3wHbQBoEo-fhXE8CeOKxY8RTT9_g?e=utzqlJ
-
 [Phase 1 readme](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/deliverables/deliverable-1/planning.md)  
 [Phase 2 readme](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/deliverables/deliverable-2/iteration-02-review.md)
 
@@ -41,16 +39,16 @@ Bonus Desktop app can be downloaded at -> https://utoronto-my.sharepoint.com/:f:
     an expired driver’s license. These users are listed first and marked in red such that it is obvious to the user,
     and the user can click on the user’s entry to get more information about the user and issue.
 
-- [Backend](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/tree/main/backend) features
+- [Backend](/server) features
     - The main functionality that the backend provides is the matching algorithm that is integral to this application.
     The core of the backend depends on a max flow algorithm located in
-    [max_flow.py](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/backend/max_flow.py)
+    [max_flow.py](/server/max_flow.py)
     which is a variant of the [Ford-Fulkerson](https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm)
     algorithm that we have implemented ourselves. This algorithm is one of the most technically challenging parts of the
     backend, as we count on it's correct operation to ensure that our matchings are correctly generated.
     - Another important feature of the backend is the ability to construct [flow networks](https://en.wikipedia.org/wiki/Flow_network)
     from the rides and driver data. This functionality is implemented in
-    [graph_constructor.py](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/backend/graph_constructor.py),
+    [graph_constructor.py](/server/graph_constructor.py),
     and allows us to construct these flow networks to find the best matchings possible. Currently, with our test data,
     the backend can output matchings in a text format like this, which is in-line with our expectations:
     ```text
@@ -66,7 +64,7 @@ Bonus Desktop app can be downloaded at -> https://utoronto-my.sharepoint.com/:f:
     ```
     - One last feature that the backend provides is the ability to convert string addresses into physical coordinates.
     This feature is implemented in
-    [maps_api.py](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/backend/maps_api.py)
+    [maps_api.py](/server/maps_api.py)
     using the [googlemaps](https://github.com/googlemaps/google-maps-services-python) API and allows us to generate optimal
     matchings by preferentially matching drivers and rides which are closer together.
 
