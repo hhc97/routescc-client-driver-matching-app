@@ -5,8 +5,8 @@ This project was made with a team of 6 people for an Intro to Software Engineeri
 
 Deployed at -> [https://routescc.herokuapp.com/](https://routescc.herokuapp.com/trips) (Access key: `admin`)  
 
-[Phase 1 readme](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/deliverables/deliverable-1/planning.md)  
-[Phase 2 readme](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/deliverables/deliverable-2/iteration-02-review.md)
+[Phase 1 readme](/deliverables/deliverable-1/planning.md)  
+[Phase 2 readme](/deliverables/deliverable-2/iteration-02-review.md)
 
 ## Description 
  * Provide a high-level description of your application and it's value from an end-user's perspective
@@ -131,7 +131,7 @@ Deployed at -> [https://routescc.herokuapp.com/](https://routescc.herokuapp.com/
 
  ## Licenses 
 
-We applied the [MIT License](https://github.com/csc301-winter-2021/team-project-9-routes-connecting-communities/blob/main/LICENSE)
+We applied the [MIT License](/LICENSE)
 to our codebase. Seeing as our project is relatively simple and will only be used
 internally at Routes Connecting Communities, the simple and straightforward MIT License seemed to be a good choice.
 Since we originally planned on the code being completely open-source and available, this choice did not significantly
