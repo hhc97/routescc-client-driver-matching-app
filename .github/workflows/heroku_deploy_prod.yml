@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Configure Heroku login credentials
@@ -33,4 +33,4 @@ jobs:
         env:
           HEROKU_PROD: ${{ secrets.HEROKU_PROD }}
       - name: Push to Heroku
-        run: git push heroku main
+        run: git push -f heroku main
